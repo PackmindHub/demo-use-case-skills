@@ -34,7 +34,7 @@ npm install -g @packmind/cli
 
 ### 2. Configure GitHub MCP Server
 
-Add the [GitHub MCP server](https://github.com/github/github-mcp-server) to your AI coding agent's MCP configuration (e.g. `.claude/mcp.json` for Claude Code):
+Add the [GitHub MCP server](https://github.com/github/github-mcp-server) to your AI coding agent's MCP configuration (e.g. `.claude/mcp.json` for Claude Code). See the [GitHub MCP server documentation](https://github.com/github/github-mcp-server) for full setup instructions.
 
 ```json
 {
