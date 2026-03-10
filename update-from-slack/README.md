@@ -8,14 +8,14 @@ Interactive usage only.
 
 ```mermaid
 flowchart TD
-    Slack["Slack\n(channel messages)"] -->|Slack MCP Server| Fetch["slack-channel-review\nPhase 1-2: Fetch messages & threads"]
-    Fetch --> Filter["Phase 2: Filter noise\n(short, emoji-only, bot status)"]
-    Filter --> Classify["Phase 3: Classify\n(convention, decision,\nbest-practice, recurring-pattern,\naction-item)"]
-    Classify --> Gate["Phase 3: Codebase\nRelevance Gate"]
-    Gate -->|codebase-relevant| Report["Phase 4: Build\nfindings report"]
-    Gate -.->|discarded| TeamLife["Team-life signals\n(meetings, HR, tooling)"]
+    Slack["Slack<br>(channel messages)"] -->|Slack MCP Server| Fetch["slack-channel-review<br>Phase 1-2: Fetch messages & threads"]
+    Fetch --> Filter["Phase 2: Filter noise<br>(short, emoji-only, bot status)"]
+    Filter --> Classify["Phase 3: Classify<br>(convention, decision,<br>best-practice, recurring-pattern,<br>action-item)"]
+    Classify --> Gate["Phase 3: Codebase<br>Relevance Gate"]
+    Gate -->|codebase-relevant| Report["Phase 4: Build<br>findings report"]
+    Gate -.->|discarded| TeamLife["Team-life signals<br>(meetings, HR, tooling)"]
     Report --> Update["packmind-update-playbook"]
-    Update -->|Packmind CLI| Packmind["Packmind\nChange Proposals"]
+    Update -->|Packmind CLI| Packmind["Packmind<br>Change Proposals"]
 ```
 
 ## Skills
@@ -36,7 +36,7 @@ npm install -g @packmind/cli
 
 ### 2. Configure Slack MCP Server
 
-Add the [Slack MCP server](https://docs.slack.dev/ai/slack-mcp-server/) to your Claude Code MCP configuration (`.claude/mcp.json`):
+Add the [Slack MCP server](https://docs.slack.dev/ai/slack-mcp-server/) to your AI coding agent's MCP configuration (e.g. `.claude/mcp.json` for Claude Code):
 
 ```json
 {
@@ -73,7 +73,7 @@ cp -r update-from-slack/skills/packmind-cli-list-commands <your-repo>/.claude/sk
 
 ## Usage
 
-Start Claude Code in your repository and invoke the skill:
+Start your AI coding agent in the repository and invoke the skill. Example with Claude Code:
 
 ```
 claude

@@ -1,14 +1,16 @@
 # Packmind Playbook Updates from External Sources
 
-Demonstrate how to automatically update your [Packmind](https://github.com/PackmindHub/packmind/) playbook by mining external data sources — using Agent Skills and MCP servers within Claude Code.
+Demonstrate how to automatically update your [Packmind](https://github.com/PackmindHub/packmind/) playbook by mining external data sources — using Agent Skills and MCP servers.
+
+> **AI agent agnostic** — Examples below use [Claude Code](https://docs.anthropic.com/en/docs/claude-code) for illustration, but the same skills and MCP-based approach work with any AI coding agent that supports MCP (GitHub Copilot, Cursor, Windsurf, etc.).
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    Source["External Source\n(GitHub, Slack, ...)"] -->|MCP Server| Skill["Source Skill\n(fetch & classify)"]
+    Source["External Source<br>(GitHub, Slack, ...)"] -->|MCP Server| Skill["Source Skill<br>(fetch & classify)"]
     Skill -->|findings report| Update["packmind-update-playbook"]
-    Update -->|CLI| Packmind["Packmind\nChange Proposals"]
+    Update -->|CLI| Packmind["Packmind<br>Change Proposals"]
 ```
 
 Each use case follows the same pattern:
@@ -36,7 +38,7 @@ The same pattern works with any data source that has an MCP server — Jira, Con
 - A [Packmind](https://docs.packmind.com) account and organization
 - `PACKMIND_API_KEY_V3` environment variable set
 - [Packmind CLI](https://docs.packmind.com/getting-started/gs-cli-setup) installed: `npm install -g @packmind/cli`
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) installed
+- An AI coding agent with MCP support (e.g. [Claude Code](https://docs.anthropic.com/en/docs/claude-code), GitHub Copilot, Cursor)
 
 ## Links
 

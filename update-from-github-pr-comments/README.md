@@ -2,18 +2,18 @@
 
 Mine review comments from merged pull requests, classify them for playbook relevance (conventions, best practices, recurring feedback, bug prevention patterns), and automatically create Packmind change proposals.
 
-Supports both interactive usage via Claude Code and automated CI runs via GitHub Actions.
+Supports both interactive usage via any AI coding agent with MCP support (Claude Code, GitHub Copilot, Cursor, etc.) and automated CI runs via GitHub Actions.
 
 ## How It Works
 
 ```mermaid
 flowchart TD
-    GH["GitHub\n(merged PRs)"] -->|GitHub MCP Server| Fetch["github-pr-review\nPhase 1-2: Fetch PRs & comments"]
-    Fetch --> Filter["Phase 2: Filter noise\n(short, LGTM, duplicates)"]
-    Filter --> Classify["Phase 3: Classify\n(convention, best-practice,\nrecurring-feedback, bug-prevention)"]
-    Classify --> Report["Phase 4: Build\nfindings report"]
+    GH["GitHub<br>(merged PRs)"] -->|GitHub MCP Server| Fetch["github-pr-review<br>Phase 1-2: Fetch PRs & comments"]
+    Fetch --> Filter["Phase 2: Filter noise<br>(short, LGTM, duplicates)"]
+    Filter --> Classify["Phase 3: Classify<br>(convention, best-practice,<br>recurring-feedback, bug-prevention)"]
+    Classify --> Report["Phase 4: Build<br>findings report"]
     Report --> Update["packmind-update-playbook"]
-    Update -->|Packmind CLI| Packmind["Packmind\nChange Proposals"]
+    Update -->|Packmind CLI| Packmind["Packmind<br>Change Proposals"]
 ```
 
 ## Skills
@@ -34,7 +34,7 @@ npm install -g @packmind/cli
 
 ### 2. Configure GitHub MCP Server
 
-Add the [GitHub MCP server](https://github.com/github/github-mcp-server) to your Claude Code MCP configuration (`.claude/mcp.json`):
+Add the [GitHub MCP server](https://github.com/github/github-mcp-server) to your AI coding agent's MCP configuration (e.g. `.claude/mcp.json` for Claude Code):
 
 ```json
 {
@@ -71,7 +71,7 @@ cp -r update-from-github-pr-comments/skills/packmind-cli-list-commands <your-rep
 
 ## Interactive Usage
 
-Start Claude Code in your repository and invoke the skill:
+Start your AI coding agent in the repository and invoke the skill. Example with Claude Code:
 
 ```
 claude
