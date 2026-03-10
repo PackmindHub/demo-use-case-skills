@@ -86,7 +86,7 @@ After analysis, findings are saved to `.claude/tmp/pr-review-findings.md` and yo
 
 ## CI Mode (GitHub Actions)
 
-The included workflow (`.github/workflows/weekly-pr-review.yml`) runs the skill automatically.
+The included workflow (`update-from-github-pr-comments/.github/workflows/weekly-pr-review.yml`) runs the skill automatically. Copy it to your repository's `.github/workflows/` directory.
 
 ### Schedule
 

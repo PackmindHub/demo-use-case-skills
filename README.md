@@ -24,6 +24,7 @@ Each use case follows the same pattern:
 |----------|--------|------|------|
 | [GitHub PR Comments](./update-from-github-pr-comments/) | Merged PR review comments | Interactive + CI (GitHub Actions) | [README](./update-from-github-pr-comments/README.md) |
 | [Slack Conversations](./update-from-slack/) | Slack channel discussions | Interactive | [README](./update-from-slack/README.md) |
+| [Jira Issues](./update-from-jira/) | Resolved Jira issues | Interactive + CI | [README](./update-from-jira/README.md) |
 
 ## Extensibility
 

@@ -38,7 +38,7 @@ npm install -g @packmind/cli
 
 The [Slack MCP server](https://docs.slack.dev/ai/slack-mcp-server/) uses **OAuth 2.0** for authentication (not a static Bearer token). Setup depends on your AI coding agent:
 
-- **Claude Code / Claude.ai / Cursor / Perplexity** — The Slack MCP server is available as a built-in integration. Connect it directly from your agent's MCP settings; the OAuth flow is handled automatically.
+- **Claude Code / Cursor / GitHub Copilot** — The Slack MCP server is available as a built-in integration. Connect it directly from your agent's MCP settings; the OAuth flow is handled automatically.
 - **Custom MCP client** — Register a Slack app (directory-published or internal), then implement the OAuth 2.0 flow using your app's `client_id` and `client_secret`. The MCP endpoint is `https://mcp.slack.com/mcp`. See the [Slack MCP server documentation](https://docs.slack.dev/ai/slack-mcp-server/) for full details on OAuth endpoints and required scopes.
 
 ### 3. Deploy Skills
