@@ -49,26 +49,26 @@ If neither condition is met, `non_interactive = false` (interactive mode — ori
    - **Non-interactive**: Log the parameters and proceed automatically:
      > "Non-interactive mode: mining MR review comments for **project_path** merged in the last **N days** (since YYYY-MM-DD)."
 
-## Phase 1: Fetch Merged MRs
+## Phase 1: Fetch MRs
 
 Use `mcp__gitlab__search` with:
 - `scope: "merge_requests"`
-- `state: "merged"`
+- `state: "merged"` (run a second search with `state: "opened"` to also include open MRs)
 - `project_id: project_path`
-- `search: ""` (empty to match all)
+- `search: "*"` (**must use `"*"`, not `""` — an empty string causes a 500 error**)
 
 Paginate using `page` and `per_page` (max 100 per page). Collect MR IIDs, titles, and web URLs.
 
-For each MR, call `mcp__gitlab__get_merge_request` to get full details including `merged_at`. Filter out MRs where `merged_at` is before the cutoff date.
+For merged MRs, call `mcp__gitlab__get_merge_request` to get full details including `merged_at`. Filter out MRs where `merged_at` is before the cutoff date. For open MRs, use `created_at` or `updated_at` from the search results for the time filter.
 
 - If no MRs remain within the time window, inform the user and stop.
-- Display progress: "Found **N** merged MRs to analyze."
+- Display progress: "Found **N** MRs to analyze (M merged, K open)."
 
 ## Phase 2: Fetch Review Comments & Filter
 
-For each MR, call `mcp__gitlab__get_workitem_notes(url: MR_web_url)` to fetch all discussion notes.
+Use `mcp__gitlab__search` with `scope: "notes"` and `project_id: project_path` to fetch all discussion notes. Then correlate notes to MRs using `noteable_type: "MergeRequest"` and `noteable_iid`.
 
-> **Fallback**: If `get_workitem_notes` does not return notes for the MR URL, fall back to `mcp__gitlab__search(scope: "notes", project_id: project_path)` with keyword-based discovery.
+> **Important**: Do NOT use `mcp__gitlab__get_workitem_notes` for MR notes — it only supports work item URLs (`/-/work_items/<iid>`), not merge request URLs. MR IIDs are not work item IIDs.
 
 ### Filtering
 
