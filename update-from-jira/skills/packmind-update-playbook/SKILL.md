@@ -218,10 +218,18 @@ Run `packmind-cli diff` and verify only this topic's changes appear.
 Run `packmind-cli diff --submit -m "<message>"` where `<message>` follows this format:
 
 ```
-<topic>: <summary> (source: Jira issues PROJ-123, PROJ-456, ...)
+<topic>: <summary> (source: <origin>)
 ```
 
-- Extract issue keys from the findings tables, scoped to issues relevant to this topic when possible
+The `<origin>` must trace back to where the finding came from. Adapt the format to the source type — examples:
+
+- **GitHub PRs**: `PR review comments from <owner/repo>, PRs #N, #M, ...`
+- **Slack**: `Slack #channel1, #channel2 discussions, YYYY-MM-DD to YYYY-MM-DD`
+- **Jira**: `Jira issues PROJ-123, PROJ-456, ...`
+- **Other sources**: use a similar pattern — always include enough context for a reviewer to locate the original discussion
+
+Extract source references from the report header and findings tables. Scope to references relevant to this topic when possible.
+
 - **Truncation rule**: if the source reference list exceeds ~200 chars, show the first 3 items and append `and N more`
 - **Max message length**: 1024 characters
 
