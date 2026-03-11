@@ -184,7 +184,13 @@ For each approved **new** artifact in this topic, read the corresponding creatio
 
 For skills: check which agent skills directory exists at the project root (`.claude/skills/`, `.cursor/skills/`, `.github/skills/`) — pick the first found in that priority order. If none exist, create `.claude/skills/`.
 
-After writing each new artifact, run `packmind-cli diff add <path> -m "<description>"` to stage it.
+After writing each new artifact, run `packmind-cli diff add <path> -m "<message>"` to stage and submit it.
+
+> **IMPORTANT**: The `-m` message on `diff add` is the submission message for that artifact — there is no separate submit step for new artifacts. Use the **full source-attributed format** from Step 2d:
+> ```
+> <topic>: <summary> (source: <origin>)
+> ```
+> Example: `packmind-cli diff add .packmind/standards/code-comment-placement.md -m "Code comment placement: Place comments above code, not inline (source: MR !1 https://gitlab.com/ns/project/-/merge_requests/1)"`
 
 ##### 2b. Edit existing artifacts (scoped to this topic)
 
