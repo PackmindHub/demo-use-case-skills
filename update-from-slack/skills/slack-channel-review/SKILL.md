@@ -148,10 +148,10 @@ Create the target directory if needed.
 ### Theme: <label>
 **Occurrences**: N across N channels/days
 
-| Channel | Date | Author | Summary |
-|---------|------|--------|---------|
-| #channel | YYYY-MM-DD | @author | Summary of message/thread |
-| #channel | YYYY-MM-DD | @author | Summary of message/thread |
+| Channel | Date | Author | Link | Summary |
+|---------|------|--------|------|---------|
+| #channel | YYYY-MM-DD | @author | [link](https://team.slack.com/archives/CHANNEL_ID/pTIMESTAMP) | Summary of message/thread |
+| #channel | YYYY-MM-DD | @author | [link](https://team.slack.com/archives/CHANNEL_ID/pTIMESTAMP) | Summary of message/thread |
 
 **Suggested playbook action**: <Create standard | Update standard X | Create skill | Create command | ...>
 **Rationale**: <Why this theme warrants a playbook change>
@@ -164,7 +164,7 @@ Create the target directory if needed.
 - **Channel**: #channel-name
 - **Date**: YYYY-MM-DD
 - **Author**: @author
-- **Thread link**: (if available)
+- **Thread link**: https://team.slack.com/archives/CHANNEL_ID/pTIMESTAMP
 - **Summary**: Condensed description of the discussion
 - **Key quotes**: Relevant excerpts from the conversation
 - **Category**: convention | decision | best-practice | recurring-pattern | action-item
@@ -180,6 +180,16 @@ Create the target directory if needed.
 |---------------|-----------------|
 | <one-line summary> | <meeting scheduling / team ritual / HR process / project management tooling / ...> |
 ```
+
+### URL Requirements
+
+**Every message/thread reference in the report MUST include the full, navigable Slack deep link** (e.g., `https://team.slack.com/archives/C01234ABC/p1234567890123456`). This is critical because `packmind-update-playbook` extracts source URLs from the findings report for its `packmind-cli diff --submit -m` source attribution. The expected attribution format is:
+
+```
+<topic>: <summary> (source: Slack #channel https://team.slack.com/archives/CHANNEL_ID/pTIMESTAMP)
+```
+
+Construct the deep link from the channel ID and message timestamp: `https://<workspace>.slack.com/archives/<CHANNEL_ID>/p<TIMESTAMP_WITHOUT_DOT>` (remove the dot from the `ts` field, e.g., `1234567890.123456` → `p1234567890123456`). Never omit the thread link — always substitute the real URL.
 
 ## Phase 5: Present and Hand Off
 

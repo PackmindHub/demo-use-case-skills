@@ -151,6 +151,16 @@ Create the target directory if needed.
 - **Suggested playbook action**: <action>
 ```
 
+### URL Requirements
+
+**Every PR reference in the report MUST include the full, navigable GitHub URL** (e.g., `https://github.com/owner/repo/pull/123`). This is critical because `packmind-update-playbook` extracts source URLs from the findings report for its `packmind-cli diff --submit -m` source attribution. The expected attribution format is:
+
+```
+<topic>: <summary> (source: PR #N https://github.com/owner/repo/pull/N, PR #M https://github.com/owner/repo/pull/M)
+```
+
+Use the `html_url` field returned by `mcp__github__search_pull_requests` for each PR. Never use placeholder `(url)` — always substitute the real URL.
+
 ## Phase 5: Present and Hand Off
 
 ### Interactive mode

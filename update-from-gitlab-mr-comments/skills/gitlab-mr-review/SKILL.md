@@ -195,6 +195,16 @@ Create the target directory if needed.
 | <one-line summary> | <CI/CD noise / process management / deployment ops / ...> |
 ```
 
+### URL Requirements
+
+**Every MR reference in the report MUST include the full, navigable GitLab URL** (e.g., `https://gitlab.com/namespace/project/-/merge_requests/123`). This is critical because `packmind-update-playbook` extracts source URLs from the findings report for its `packmind-cli diff --submit -m` source attribution. The expected attribution format is:
+
+```
+<topic>: <summary> (source: MR !N https://gitlab.com/namespace/project/-/merge_requests/N, MR !M https://gitlab.com/namespace/project/-/merge_requests/M)
+```
+
+Use the `web_url` field returned by `mcp__gitlab__get_merge_request` for each MR. Never use placeholder `(url)` — always substitute the real URL.
+
 ## Phase 5: Present and Hand Off
 
 ### Interactive mode

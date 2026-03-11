@@ -231,6 +231,8 @@ The `<origin>` must include the URL(s) of the source so a reviewer can navigate 
 
 Extract source references from the report header and findings tables. Scope to references relevant to this topic when possible.
 
+**URL requirement**: The `<origin>` MUST contain real, navigable URLs — never placeholders like `(url)`. Each use case skill is responsible for populating full URLs in its findings report (using API response fields like `html_url`, `web_url`, issue keys, or channel IDs + timestamps). If a findings report contains placeholder URLs instead of real ones, **do not submit** — log a warning and skip the submission for that topic.
+
 - **Truncation rule**: if the source reference list exceeds ~200 chars, show the first 3 items and append `and N more`
 - **Max message length**: 1024 characters
 

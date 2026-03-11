@@ -191,6 +191,16 @@ Create the target directory if needed.
 | <one-line summary> | <project metrics / process tooling / team ritual / ...> |
 ```
 
+### URL Requirements
+
+**Every issue reference in the report MUST include the full, navigable Jira URL** (e.g., `https://team.atlassian.net/browse/PROJ-123`). This is critical because `packmind-update-playbook` extracts source URLs from the findings report for its `packmind-cli diff --submit -m` source attribution. The expected attribution format is:
+
+```
+<topic>: <summary> (source: Jira PROJ-123 https://team.atlassian.net/browse/PROJ-123)
+```
+
+Construct the URL from the API response: use the `self` field's base URL or build `https://<site>.atlassian.net/browse/<issueKey>` from the issue key. Never use placeholder `(url)` — always substitute the real URL.
+
 ## Phase 5: Present and Hand Off
 
 ### Interactive mode
