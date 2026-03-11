@@ -160,9 +160,21 @@ Present this report and ask the user for approval:
 
 ### Phase 4: Apply Changes
 
-#### Step 1: Write new artifacts
+#### Step 1: Group approved changes by topic
 
-For each approved **new** artifact, read the corresponding creation procedure from `references/`, then write the file(s) at the specified location:
+Cluster all approved changes (new + update + deprecate) into semantic topic groups:
+
+- Each change belongs to exactly **one** topic
+- If one finding produces multiple artifact changes (e.g., a standard + a skill), they share the same topic
+- Name each topic concisely (e.g., "Error handling conventions", "Logging format")
+
+#### Step 2: Apply and submit per topic
+
+For **each** topic group, execute the following steps in order. Complete the full cycle (2a→2d) for one topic before starting the next.
+
+##### 2a. Write new artifacts (scoped to this topic)
+
+For each approved **new** artifact in this topic, read the corresponding creation procedure from `references/`, then write the file(s) at the specified location:
 
 | Artifact Type | Creation Procedure | Write Path |
 |---|---|---|
@@ -172,11 +184,11 @@ For each approved **new** artifact, read the corresponding creation procedure fr
 
 For skills: check which agent skills directory exists at the project root (`.claude/skills/`, `.cursor/skills/`, `.github/skills/`) — pick the first found in that priority order. If none exist, create `.claude/skills/`.
 
-After writing each new artifact, run `packmind-cli diff add <path> -m "<description>"` to submit it as a change proposal. The message must be non-empty and max 1024 characters.
+After writing each new artifact, run `packmind-cli diff add <path> -m "<description>"` to stage it.
 
-#### Step 2: Preview updates
+##### 2b. Edit existing artifacts (scoped to this topic)
 
-For each approved **update** to an existing artifact, edit the local installed files directly. Search the project root **and all subdirectories** (e.g. `src/backend/.cursor/skills/`, `packages/api/.packmind/standards/`):
+For each approved **update** to an existing artifact in this topic, edit the local installed files directly. Search the project root **and all subdirectories** (e.g. `src/backend/.cursor/skills/`, `packages/api/.packmind/standards/`):
 
 - **Standards**: `**/.packmind/standards/<slug>.md` (source of truth). Installed copies also exist in:
   - Claude Code: `**/.claude/rules/packmind/`
@@ -193,17 +205,33 @@ For each approved **update** to an existing artifact, edit the local installed f
 
 If a same artifact exists in multiple agent directories, pick one to edit.
 
-**Non-interactive mode**: Run `packmind-cli diff` and log the output. Proceed without waiting for confirmation.
+##### 2c. Preview (scoped to this topic)
 
-**Interactive mode** (original behavior):
+Run `packmind-cli diff` and verify only this topic's changes appear.
 
-Run `packmind-cli diff` and present the output. Verify the diff matches the intended changes — no unrelated modifications should be included. If unrelated changes appear, inform the user before proceeding.
+**Non-interactive mode**: Log the output. Proceed without waiting for confirmation.
 
-#### Step 3: Submit updates
+**Interactive mode**: Present the output. If unrelated changes appear, inform the user before proceeding.
 
-Run `packmind-cli diff --submit -m "<concise summary of all changes>"` to submit the changes as proposals for human review on Packmind.
+##### 2d. Submit with source attribution
 
-#### Step 4: Propagate
+Run `packmind-cli diff --submit -m "<message>"` where `<message>` follows this format:
+
+```
+<topic>: <summary> (source: Jira issues PROJ-123, PROJ-456, ...)
+```
+
+- Extract issue keys from the findings tables, scoped to issues relevant to this topic when possible
+- **Truncation rule**: if the source reference list exceeds ~200 chars, show the first 3 items and append `and N more`
+- **Max message length**: 1024 characters
+
+##### Post-submit verification
+
+After submitting, run `packmind-cli diff` and verify it returns empty before starting the next topic. This prevents cross-topic contamination.
+
+**Repeat steps 2a→2d for each remaining topic group.**
+
+#### Step 3: Propagate
 
 **Non-interactive mode**: Skip this step entirely. Changes are submitted as proposals for human review on Packmind — propagation requires human validation and will happen in a subsequent interactive session or CI step.
 
