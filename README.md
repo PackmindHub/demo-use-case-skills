@@ -20,14 +20,14 @@ Each use case follows the same pattern:
 
 ## Use Cases
 
-| Use Case | Source | Mode | Link |
-|----------|--------|------|------|
-| [GitHub PR Comments](./update-from-github-pr-comments/) | Merged PR review comments | Interactive + CI (GitHub Actions) | [README](./update-from-github-pr-comments/README.md) |
-| [Slack Conversations](./update-from-slack/) | Slack channel discussions | Interactive | [README](./update-from-slack/README.md) |
-| [Jira Issues](./update-from-jira/) | Resolved Jira issues | Interactive + CI | [README](./update-from-jira/README.md) |
-| [GitLab MR Comments](./update-from-gitlab-mr-comments/) | Merged MR review comments | Interactive + CI | [README](./update-from-gitlab-mr-comments/README.md) |
-| [Confluence Documentation](./update-from-confluence/) | Confluence pages & spaces | Interactive + CI | [README](./update-from-confluence/README.md) |
-| [Notion Documentation](./update-from-notion/) | Notion pages & databases | Interactive + CI | [README](./update-from-notion/README.md) |
+| Use Case | Source | Link |
+|----------|--------|------|
+| [GitHub PR Comments](./update-from-github-pr-comments/) | Merged PR review comments | [README](./update-from-github-pr-comments/README.md) |
+| [Slack Conversations](./update-from-slack/) | Slack channel discussions | [README](./update-from-slack/README.md) |
+| [Jira Issues](./update-from-jira/) | Resolved Jira issues | [README](./update-from-jira/README.md) |
+| [GitLab MR Comments](./update-from-gitlab-mr-comments/) | Merged MR review comments | [README](./update-from-gitlab-mr-comments/README.md) |
+| [Confluence Documentation](./update-from-confluence/) | Confluence pages & spaces | [README](./update-from-confluence/README.md) |
+| [Notion Documentation](./update-from-notion/) | Notion pages & databases | [README](./update-from-notion/README.md) |
 
 ## Extensibility
 

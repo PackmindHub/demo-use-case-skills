@@ -61,11 +61,25 @@ Retrieve details about a Notion entity (page, database, or data source) by URL o
 
 ### Response Fields (Page)
 
-- Page title
-- Page content in enhanced Markdown
-- Page URL (navigable `notion.so` URL)
-- Last edited time
-- Parent information
+The response `text` field contains XML-like enhanced Markdown with this structure:
+
+```xml
+<page url="https://www.notion.so/...">
+  <ancestor-path>
+    <parent-page url="..." title="..."/>
+    <!-- or <parent-database url="..." title="..."/> -->
+  </ancestor-path>
+  <properties>{"title":"Page Title", ...}</properties>
+  <content>
+    ...markdown body...
+  </content>
+</page>
+```
+
+- **`<content>`** — the actual page body in Markdown. Empty pages return `<empty-block/>` (treat as no content for filtering).
+- **`<ancestor-path>`** — parent chain with URLs and titles.
+- **`<properties>`** — JSON object with page properties.
+- The response also exposes `metadata.type`, `title`, and `url` at the top level.
 
 ### Response Fields (Database)
 
