@@ -27,6 +27,7 @@ Each use case follows the same pattern:
 | [Jira Issues](./update-from-jira/) | Resolved Jira issues | Interactive + CI | [README](./update-from-jira/README.md) |
 | [GitLab MR Comments](./update-from-gitlab-mr-comments/) | Merged MR review comments | Interactive + CI | [README](./update-from-gitlab-mr-comments/README.md) |
 | [Confluence Documentation](./update-from-confluence/) | Confluence pages & spaces | Interactive + CI | [README](./update-from-confluence/README.md) |
+| [Notion Documentation](./update-from-notion/) | Notion pages & databases | Interactive + CI | [README](./update-from-notion/README.md) |
 
 ## Extensibility
 
