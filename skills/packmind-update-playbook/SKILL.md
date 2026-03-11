@@ -226,6 +226,7 @@ The `<origin>` must include the URL(s) of the source so a reviewer can navigate 
 - **GitHub PRs**: `PR #N https://github.com/<owner/repo>/pull/N, PR #M https://github.com/<owner/repo>/pull/M`
 - **Slack**: `Slack #channel https://team.slack.com/archives/CHANNEL_ID/pTIMESTAMP`
 - **Jira**: `Jira KAN-1 https://team.atlassian.net/browse/KAN-1`
+- **Confluence**: `Confluence <Page Title> https://team.atlassian.net/wiki/spaces/ENG/pages/123456789`
 - **Other sources**: use a similar pattern — always include the URL so a reviewer can navigate directly to the original discussion
 
 Extract source references from the report header and findings tables. Scope to references relevant to this topic when possible.

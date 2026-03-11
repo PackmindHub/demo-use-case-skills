@@ -8,7 +8,7 @@ Demonstrate how to automatically update your [Packmind](https://github.com/Packm
 
 ```mermaid
 flowchart LR
-    Source["External Source<br>(GitHub, Slack, ...)"] -->|MCP Server| Skill["Source Skill<br>(fetch & classify)"]
+    Source["External Source<br>(GitHub, GitLab, Slack,<br>Confluence, ...)"] -->|MCP Server| Skill["Source Skill<br>(fetch & classify)"]
     Skill -->|findings report| Update["packmind-update-playbook"]
     Update -->|CLI| Packmind["Packmind<br>Change Proposals"]
 ```
@@ -25,6 +25,8 @@ Each use case follows the same pattern:
 | [GitHub PR Comments](./update-from-github-pr-comments/) | Merged PR review comments | Interactive + CI (GitHub Actions) | [README](./update-from-github-pr-comments/README.md) |
 | [Slack Conversations](./update-from-slack/) | Slack channel discussions | Interactive | [README](./update-from-slack/README.md) |
 | [Jira Issues](./update-from-jira/) | Resolved Jira issues | Interactive + CI | [README](./update-from-jira/README.md) |
+| [GitLab MR Comments](./update-from-gitlab-mr-comments/) | Merged MR review comments | Interactive + CI | [README](./update-from-gitlab-mr-comments/README.md) |
+| [Confluence Documentation](./update-from-confluence/) | Confluence pages & spaces | Interactive + CI | [README](./update-from-confluence/README.md) |
 
 ## Extensibility
 
