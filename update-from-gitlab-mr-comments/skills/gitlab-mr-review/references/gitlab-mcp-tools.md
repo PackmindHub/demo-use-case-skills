@@ -13,7 +13,7 @@ Search across GitLab for merge requests, issues, notes, and more.
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `scope` | string | Yes | Search scope: `merge_requests`, `issues`, `notes`, `milestones`, `projects`, etc. |
-| `search` | string | Yes | Search query string (can be empty to match all) |
+| `search` | string | Yes | Search query string. **Use `"*"` to match all** — an empty string `""` causes a 500 error. |
 | `state` | string | No | Filter by state: `opened`, `closed`, `merged` (for merge requests) |
 | `project_id` | string | No | Project path (`namespace/project`) to scope the search |
 | `page` | number | No | Page number for pagination (default: 1) |
@@ -44,12 +44,27 @@ Search across GitLab for merge requests, issues, notes, and more.
 ```
 mcp__gitlab__search(
   scope: "merge_requests",
-  search: "",
+  search: "*",
   state: "merged",
   project_id: "namespace/project",
   per_page: 100
 )
 ```
+
+### Usage for MR Notes (Recommended for MR Comments)
+
+Use `scope: "notes"` to fetch review comments from merge requests. This is the **primary method** for retrieving MR discussion notes — `get_workitem_notes` does not support MR URLs (see caveat below).
+
+```
+mcp__gitlab__search(
+  scope: "notes",
+  search: "*",
+  project_id: "namespace/project",
+  per_page: 100
+)
+```
+
+Response includes `noteable_type` (`"MergeRequest"`, `"Issue"`) and `noteable_iid` to correlate notes back to their parent MR.
 
 ---
 
@@ -88,17 +103,21 @@ Get full details for a specific merge request.
 
 **Tool**: `mcp__gitlab__get_workitem_notes`
 
-Get discussion notes for a work item (merge request, issue, etc.) by URL.
+Get discussion notes for a work item by URL.
+
+> **CAVEAT — NOT usable for Merge Request notes.** This tool only accepts `/-/work_items/<iid>` URLs. Passing a merge request URL (`/-/merge_requests/<iid>`) returns a validation error. Using `project_id` + `work_item_iid` with an MR IID also fails because MR IIDs are not work item IIDs.
+>
+> **For MR comments, use `mcp__gitlab__search` with `scope: "notes"` instead** (see Search section above).
 
 ### Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `url` | string | Yes | Full web URL of the work item (e.g., `https://gitlab.com/namespace/project/-/merge_requests/123`) |
+| `url` | string | Yes | Full web URL of a **work item** (e.g., `https://gitlab.com/namespace/project/-/work_items/42`). MR URLs are **not supported**. |
 | `project_id` | string | No | Project path (alternative to URL-based lookup) |
-| `work_item_iid` | number | No | Work item IID (alternative to URL-based lookup) |
-| `page` | number | No | Page number for pagination (default: 1) |
-| `per_page` | number | No | Results per page (default: 20) |
+| `work_item_iid` | number | No | Work item IID (alternative to URL-based lookup) — this is a **work item** IID, not an MR IID |
+| `first` | number | No | Number of notes to return (forward pagination, max 100) |
+| `after` | string | No | Cursor for forward pagination |
 
 ### Response Fields
 
