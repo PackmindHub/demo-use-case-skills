@@ -17,7 +17,7 @@ description: >-
 
 Evaluate the user's intent against existing Packmind artifacts (standards, commands, skills) to identify what needs creating, updating, or deprecating. Produce a structured change report, then apply approved changes.
 
-**⚠️ MANDATORY WORKFLOW — This skill defines a strict phase sequence (0→1→2→3→4, plus Phase 5 in non-interactive mode). Do NOT skip phases or edit artifact files directly. Even for a single-line change, follow every phase. The workflow ensures changes are reviewed, approved, submitted, and propagated correctly.**
+**⚠️ MANDATORY WORKFLOW — This skill defines a strict phase sequence (0→1→2→3→4, plus Phase 5 in non-interactive mode). Do NOT skip phases or edit artifact files directly. Even for a single-line change, follow every phase. The workflow ensures changes are reviewed, approved, submitted correctly.**
 
 ## Execution Mode Detection
 
@@ -221,12 +221,12 @@ Run `packmind-cli diff --submit -m "<message>"` where `<message>` follows this f
 <topic>: <summary> (source: <origin>)
 ```
 
-The `<origin>` must trace back to where the finding came from. Adapt the format to the source type — examples:
+The `<origin>` must include the URL(s) of the source so a reviewer can navigate directly to the original discussion. Adapt the format to the source type — examples:
 
-- **GitHub PRs**: `PR review comments from <owner/repo>, PRs #N, #M, ...`
-- **Slack**: `Slack #channel1, #channel2 discussions, YYYY-MM-DD to YYYY-MM-DD`
-- **Jira**: `Jira issues PROJ-123, PROJ-456, ...`
-- **Other sources**: use a similar pattern — always include enough context for a reviewer to locate the original discussion
+- **GitHub PRs**: `PR #N https://github.com/<owner/repo>/pull/N, PR #M https://github.com/<owner/repo>/pull/M`
+- **Slack**: `Slack #channel https://team.slack.com/archives/CHANNEL_ID/pTIMESTAMP`
+- **Jira**: `Jira KAN-1 https://team.atlassian.net/browse/KAN-1`
+- **Other sources**: use a similar pattern — always include the URL so a reviewer can navigate directly to the original discussion
 
 Extract source references from the report header and findings tables. Scope to references relevant to this topic when possible.
 
@@ -238,18 +238,6 @@ Extract source references from the report header and findings tables. Scope to r
 After submitting, run `packmind-cli diff` and verify it returns empty before starting the next topic. This prevents cross-topic contamination.
 
 **Repeat steps 2a→2d for each remaining topic group.**
-
-#### Step 3: Propagate
-
-**Non-interactive mode**: Skip this step entirely. Changes are submitted as proposals for human review on Packmind — propagation requires human validation and will happen in a subsequent interactive session or CI step.
-
-**Interactive mode** (original behavior):
-
-Ask the user whether they have validated the submitted changes in the **Review Changes** module in Packmind and wish to propagate them locally. If yes, run:
-
-```bash
-packmind-cli install --recursive
-```
 
 ### Phase 5: Log Report (non-interactive only)
 
