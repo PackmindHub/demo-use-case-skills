@@ -19,6 +19,10 @@ Evaluate the user's intent against existing Packmind artifacts (standards, comma
 
 **⚠️ MANDATORY WORKFLOW — This skill defines a strict phase sequence (0→1→2→3→4, plus Phase 5 in non-interactive mode). Do NOT skip phases or edit artifact files directly. Even for a single-line change, follow every phase. The workflow ensures changes are reviewed, approved, submitted correctly.**
 
+## Requirements
+
+- **Source attribution in CLI messages**: Every `packmind-cli diff -m` and `packmind-cli diff --submit -m` message MUST include navigable URLs linking to the original datasources (e.g., GitHub PR, Slack thread, Jira ticket, Confluence page, Notion page). Never use placeholder URLs. See Step 2d for format details.
+
 ## Execution Mode Detection
 
 Determine the execution mode **before** starting the workflow:
